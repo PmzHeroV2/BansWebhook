@@ -5,27 +5,6 @@ litebans-do-not-send-silent-punishments: true
 #Reload : bwh.reload
 
 ban:
-  options:
-    send-enabled: true
-    embed-color: "red"
-    thumbnail:
-      enabled: false
-      url: "url-here"
-  webhook-settings:
-    punished-by:
-      name: "Banned By"
-      value: "%operator%"
-    username:
-      name: "Username"
-      value: %username%
-    reason:
-      name: "Reason"
-      value: "%reason%"
-    duration:
-      name: "Duration"
-      value: "%duration%"
-
-ban1:
   enabled: true
   webhook-url: "enter-url-here"
   webhook-title: "New Ban!"

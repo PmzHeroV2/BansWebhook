@@ -1,11 +1,3 @@
-# BansWebhook
-* Sends punishment info to a discord webhook
-
-# Commands :
-* /bwh reload - Reloads Configuration (bwh.reload)
-
-# Configuration :
-```yaml
 reload-message: "&aReloaded Configuration!"
 litebans-do-not-send-silent-punishments: true
 
@@ -13,6 +5,27 @@ litebans-do-not-send-silent-punishments: true
 #Reload : bwh.reload
 
 ban:
+  options:
+    send-enabled: true
+    embed-color: "red"
+    thumbnail:
+      enabled: false
+      url: "url-here"
+  webhook-settings:
+    punished-by:
+      name: "Banned By"
+      value: "%operator%"
+    username:
+      name: "Username"
+      value: %username%
+    reason:
+      name: "Reason"
+      value: "%reason%"
+    duration:
+      name: "Duration"
+      value: "%duration%"
+
+ban1:
   enabled: true
   webhook-url: "enter-url-here"
   webhook-title: "New Ban!"
@@ -35,6 +48,3 @@ kick:
   webhook-url: "enter-url-here"
   webhook-title: "New Kick!"
   webhook-thumbnail: "webhook-thumbnail-url-here"
-```
-
-If there is any bug. report it to me in discord and i will try to fix it as soon as possible Parsa#7846

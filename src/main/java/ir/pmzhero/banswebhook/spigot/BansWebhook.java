@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class BansWebhook extends JavaPlugin {
 
     public static ir.pmzhero.banswebhook.spigot.BansWebhook instance;
+
     public static ir.pmzhero.banswebhook.spigot.BansWebhook getInstance() {
         return instance;
     }

@@ -15,8 +15,7 @@ import java.util.Objects;
 
 public class LitebansWebhook {
 
-    private static final ir.pmzhero.banswebhook.spigot.BansWebhook instance = ir.pmzhero.banswebhook.spigot.BansWebhook .getInstance();
-
+    private static final ir.pmzhero.banswebhook.spigot.BansWebhook instance = ir.pmzhero.banswebhook.spigot.BansWebhook.getInstance();
 
 
     public static void registerEvent(String entryType, String punishedBy) {
@@ -24,7 +23,8 @@ public class LitebansWebhook {
             @Override
             public void entryAdded(Entry entry) {
                 if (entry.getType().equals(entryType)) {
-                    if (entry.isSilent() && instance.getConfig().getBoolean("litebans-do-not-send-silent-punishments")) return;
+                    if (entry.isSilent() && instance.getConfig().getBoolean("litebans-do-not-send-silent-punishments"))
+                        return;
                     if (!instance.getConfig().getConfigurationSection(entryType).getBoolean("enabled")) return;
                     String uuid = entry.getUuid();
                     String query = "SELECT name FROM {history} WHERE uuid=? ORDER BY date DESC LIMIT 1";
@@ -49,7 +49,6 @@ public class LitebansWebhook {
                                         .addField(field4)
                                         .build();
                                 client.send(embed);
-
 
 
                             }

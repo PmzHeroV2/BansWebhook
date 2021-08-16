@@ -9,6 +9,7 @@ import net.md_5.bungee.api.plugin.Plugin;
 public class BansWebhook extends Plugin {
 
     public static BansWebhook instance;
+
     public static BansWebhook getInstance() {
         return instance;
     }

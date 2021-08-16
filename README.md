@@ -1,10 +1,13 @@
 # BansWebhook
+
 * Sends punishment info to a discord webhook
 
 # Commands :
+
 * /bwh reload - Reloads Configuration (bwh.reload)
 
 # Configuration :
+
 ```yaml
 reload-message: "&aReloaded Configuration!"
 litebans-do-not-send-silent-punishments: true

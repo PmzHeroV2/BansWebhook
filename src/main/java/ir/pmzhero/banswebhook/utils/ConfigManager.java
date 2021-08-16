@@ -14,6 +14,7 @@ public class ConfigManager {
 
     private static final BansWebhook instance = BansWebhook.getInstance();
     private static Configuration configuration = null;
+
     static {
         try {
             saveDefaultConfig();
@@ -34,6 +35,7 @@ public class ConfigManager {
             e.printStackTrace();
         }
     }
+
     public static void reloadConfig() {
         try {
             configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(instance.getDataFolder(), "config.yml"));

@@ -1,7 +1,7 @@
 package ir.pmzhero.banswebhook.bungeecord.commands;
 
-import ir.pmzhero.banswebhook.utils.Utils;
 import ir.pmzhero.banswebhook.utils.ConfigManager;
+import ir.pmzhero.banswebhook.utils.Utils;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;

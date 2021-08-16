@@ -2,8 +2,8 @@ name: BansWebhook
 version: ${project.version}
 main: ir.pmzhero.banswebhook.spigot.BansWebhook
 api-version: 1.13
-softdepend: [LiteBans, AdvancedBan]
-authors: [PmzHero]
+softdepend: [ LiteBans, AdvancedBan ]
+authors: [ PmzHero ]
 description: Sends punishment info to a discord webhook
 commands:
   bwh:

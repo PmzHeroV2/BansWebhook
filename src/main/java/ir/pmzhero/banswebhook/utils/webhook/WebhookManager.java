@@ -1,6 +1,5 @@
 package ir.pmzhero.banswebhook.utils.webhook;
 
-import club.minnced.discord.webhook.WebhookClient;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 
@@ -20,11 +19,11 @@ public class WebhookManager {
     public String embedTitle;
     public String embedThumbnailUrl;
 
-    public static WebhookManager getInstance() {
-        return new WebhookManager();
+    private WebhookManager() {
     }
 
-    private WebhookManager() {
+    public static WebhookManager getInstance() {
+        return new WebhookManager();
     }
 
     public final WebhookEmbed buildPunishmentEmbed(WebhookPunishment punishment) {
@@ -44,7 +43,6 @@ public class WebhookManager {
 
         return builder.build();
     }
-
 
 
     private boolean isNull(Object ob) {

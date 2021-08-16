@@ -1,15 +1,10 @@
 package ir.pmzhero.banswebhook.spigot.advancedbans;
 
 import club.minnced.discord.webhook.WebhookClient;
-import club.minnced.discord.webhook.send.WebhookEmbed;
-import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
-import ir.pmzhero.banswebhook.utils.ConfigManager;
-import ir.pmzhero.banswebhook.utils.Utils;
 import ir.pmzhero.banswebhook.utils.webhook.WebhookManager;
 import ir.pmzhero.banswebhook.utils.webhook.WebhookPunishment;
 import me.leoko.advancedban.bukkit.event.PunishmentEvent;
 import me.leoko.advancedban.utils.Punishment;
-import me.leoko.advancedban.utils.PunishmentType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -22,7 +17,7 @@ public class AdvancedBansWebhook implements Listener {
     public void onPunish(PunishmentEvent event) {
         final boolean debug = instance.getConfig().getBoolean("debug");
 
-        instance.getLogger().info("onPunish received! "+event.getPunishment().toString());
+        instance.getLogger().info("onPunish received! " + event.getPunishment().toString());
 
         Punishment punishment = event.getPunishment();
         WebhookPunishment webhookPunishment = WebhookPunishment.translatePunishmentType(punishment.getType());
@@ -30,7 +25,7 @@ public class AdvancedBansWebhook implements Listener {
 
         if (!instance.getConfig().getConfigurationSection(webhookPunishment.configurationSectionIdentifier).getBoolean("enabled", true)) {
             if (debug)
-                instance.getLogger().info("Punishment for "+punishment.toString()+" not sent: Configuration for "+webhookPunishment.configurationSectionIdentifier +": enabled is set to false");
+                instance.getLogger().info("Punishment for " + punishment.toString() + " not sent: Configuration for " + webhookPunishment.configurationSectionIdentifier + ": enabled is set to false");
 
             return;
         }
@@ -51,7 +46,7 @@ public class AdvancedBansWebhook implements Listener {
         client.send(webhookManager.buildPunishmentEmbed(webhookPunishment));
 
         if (debug)
-            instance.getLogger().info("Successfully sent Punishment to Webhook: "+punishment.toString());
+            instance.getLogger().info("Successfully sent Punishment to Webhook: " + punishment.toString());
 
     }
 

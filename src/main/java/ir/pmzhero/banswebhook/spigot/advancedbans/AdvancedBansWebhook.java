@@ -3,102 +3,55 @@ package ir.pmzhero.banswebhook.spigot.advancedbans;
 import club.minnced.discord.webhook.WebhookClient;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
+import ir.pmzhero.banswebhook.utils.ConfigManager;
+import ir.pmzhero.banswebhook.utils.Utils;
+import ir.pmzhero.banswebhook.utils.webhook.WebhookManager;
+import ir.pmzhero.banswebhook.utils.webhook.WebhookPunishment;
 import me.leoko.advancedban.bukkit.event.PunishmentEvent;
+import me.leoko.advancedban.utils.Punishment;
 import me.leoko.advancedban.utils.PunishmentType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-
 
 public class AdvancedBansWebhook implements Listener {
 
     private static final ir.pmzhero.banswebhook.spigot.BansWebhook instance = ir.pmzhero.banswebhook.spigot.BansWebhook.getInstance();
 
+
     @EventHandler
     public void onPunish(PunishmentEvent event) {
+        final boolean debug = instance.getConfig().getBoolean("debug");
 
-        PunishmentType type = event.getPunishment().getType();
+        instance.getLogger().info("onPunish received! "+event.getPunishment().toString());
 
-        if (type.equals(PunishmentType.BAN) || type.equals(PunishmentType.TEMP_BAN) || (type.equals(PunishmentType.IP_BAN)) || type.equals(PunishmentType.TEMP_IP_BAN)) {
-            if (!instance.getConfig().getConfigurationSection("ban").getBoolean("enabled")) return;
-
-
-            WebhookClient client = WebhookClient.withUrl(instance.getConfig().getConfigurationSection("ban").getString("webhook-url"));
-            WebhookEmbed.EmbedTitle title = new WebhookEmbed.EmbedTitle(instance.getConfig().getConfigurationSection("ban").getString("webhook-title"), "");
-            WebhookEmbed.EmbedField field1 = new WebhookEmbed.EmbedField(false, "Banned By", event.getPunishment().getOperator());
-            WebhookEmbed.EmbedField field2 = new WebhookEmbed.EmbedField(false, "Username", event.getPunishment().getName());
-            WebhookEmbed.EmbedField field3 = new WebhookEmbed.EmbedField(false, "Reason", event.getPunishment().getReason());
-            WebhookEmbed.EmbedField field4 = new WebhookEmbed.EmbedField(false, "Duration", event.getPunishment().getDuration(true));
-            WebhookEmbed embed = new WebhookEmbedBuilder()
-                    .setTitle(title)
-                    .setThumbnailUrl(instance.getConfig().getConfigurationSection("ban").getString("webhook-thumbnail"))
-                    .setColor(0xFF0000)
-                    .addField(field1)
-                    .addField(field2)
-                    .addField(field3)
-                    .addField(field4)
-                    .build();
-            client.send(embed);
-        } else if (type.equals(PunishmentType.WARNING) || (type.equals(PunishmentType.TEMP_WARNING))) {
-            if (!instance.getConfig().getConfigurationSection("warn").getBoolean("enabled")) return;
+        Punishment punishment = event.getPunishment();
+        WebhookPunishment webhookPunishment = WebhookPunishment.translatePunishmentType(punishment.getType());
 
 
-            WebhookClient client = WebhookClient.withUrl(instance.getConfig().getConfigurationSection("warn").getString("webhook-url"));
-            WebhookEmbed.EmbedTitle title = new WebhookEmbed.EmbedTitle(instance.getConfig().getConfigurationSection("warn").getString("webhook-title"), "");
-            WebhookEmbed.EmbedField field1 = new WebhookEmbed.EmbedField(false, "Warned By", event.getPunishment().getOperator());
-            WebhookEmbed.EmbedField field2 = new WebhookEmbed.EmbedField(false, "Username", event.getPunishment().getName());
-            WebhookEmbed.EmbedField field3 = new WebhookEmbed.EmbedField(false, "Reason", event.getPunishment().getReason());
-            WebhookEmbed.EmbedField field4 = new WebhookEmbed.EmbedField(false, "Duration", event.getPunishment().getDuration(true));
-            WebhookEmbed embed = new WebhookEmbedBuilder()
-                    .setTitle(title)
-                    .setThumbnailUrl(instance.getConfig().getConfigurationSection("warn").getString("webhook-thumbnail"))
-                    .setColor(0xFF0000)
-                    .addField(field1)
-                    .addField(field2)
-                    .addField(field3)
-                    .addField(field4)
-                    .build();
-            client.send(embed);
-        } else if (type.equals(PunishmentType.KICK)) {
-            if (!instance.getConfig().getConfigurationSection("kick").getBoolean("enabled")) return;
+        if (!instance.getConfig().getConfigurationSection(webhookPunishment.configurationSectionIdentifier).getBoolean("enabled", true)) {
+            if (debug)
+                instance.getLogger().info("Punishment for "+punishment.toString()+" not sent: Configuration for "+webhookPunishment.configurationSectionIdentifier +": enabled is set to false");
 
-
-            WebhookClient client = WebhookClient.withUrl(instance.getConfig().getConfigurationSection("kick").getString("webhook-url"));
-            WebhookEmbed.EmbedTitle title = new WebhookEmbed.EmbedTitle(instance.getConfig().getConfigurationSection("kick").getString("webhook-title"), "");
-            WebhookEmbed.EmbedField field1 = new WebhookEmbed.EmbedField(false, "Kicked By", event.getPunishment().getOperator());
-            WebhookEmbed.EmbedField field2 = new WebhookEmbed.EmbedField(false, "Username", event.getPunishment().getName());
-            WebhookEmbed.EmbedField field3 = new WebhookEmbed.EmbedField(false, "Reason", event.getPunishment().getReason());
-            WebhookEmbed.EmbedField field4 = new WebhookEmbed.EmbedField(false, "Duration", event.getPunishment().getDuration(true));
-            WebhookEmbed embed = new WebhookEmbedBuilder()
-                    .setTitle(title)
-                    .setThumbnailUrl(instance.getConfig().getConfigurationSection("kick").getString("webhook-thumbnail"))
-                    .setColor(0xFF0000)
-                    .addField(field1)
-                    .addField(field2)
-                    .addField(field3)
-                    .addField(field4)
-                    .build();
-            client.send(embed);
-        } else if (type.equals(PunishmentType.MUTE) || (type.equals(PunishmentType.TEMP_MUTE))) {
-            if (!instance.getConfig().getConfigurationSection("mute").getBoolean("enabled")) return;
-
-
-            WebhookClient client = WebhookClient.withUrl(instance.getConfig().getConfigurationSection("mute").getString("webhook-url"));
-            WebhookEmbed.EmbedTitle title = new WebhookEmbed.EmbedTitle(instance.getConfig().getConfigurationSection("mute").getString("webhook-title"), "");
-            WebhookEmbed.EmbedField field1 = new WebhookEmbed.EmbedField(false, "Muted By", event.getPunishment().getOperator());
-            WebhookEmbed.EmbedField field2 = new WebhookEmbed.EmbedField(false, "Username", event.getPunishment().getName());
-            WebhookEmbed.EmbedField field3 = new WebhookEmbed.EmbedField(false, "Reason", event.getPunishment().getReason());
-            WebhookEmbed.EmbedField field4 = new WebhookEmbed.EmbedField(false, "Duration", event.getPunishment().getDuration(true));
-            WebhookEmbed embed = new WebhookEmbedBuilder()
-                    .setTitle(title)
-                    .setThumbnailUrl(instance.getConfig().getConfigurationSection("mute").getString("webhook-thumbnail"))
-                    .setColor(0xFF0000)
-                    .addField(field1)
-                    .addField(field2)
-                    .addField(field3)
-                    .addField(field4)
-                    .build();
-            client.send(embed);
+            return;
         }
+
+
+        WebhookClient client = WebhookClient.withUrl(instance.getConfig().getConfigurationSection(webhookPunishment.configurationSectionIdentifier).getString("webhook-url"));
+
+        WebhookManager webhookManager = WebhookManager.getInstance();
+
+        webhookManager.punishmentOperator = punishment.getOperator();
+        webhookManager.punishmentUser = punishment.getName();
+        webhookManager.punishmentReason = punishment.getReason();
+        webhookManager.stringPunishmentDuration = punishment.getDuration(true);
+
+        webhookManager.embedThumbnailUrl = instance.getConfig().getConfigurationSection(webhookPunishment.configurationSectionIdentifier).getString("webhook-thumbnail");
+        webhookManager.embedTitle = instance.getConfig().getConfigurationSection(webhookPunishment.configurationSectionIdentifier).getString("webhook-title");
+
+        client.send(webhookManager.buildPunishmentEmbed(webhookPunishment));
+
+        if (debug)
+            instance.getLogger().info("Successfully sent Punishment to Webhook: "+punishment.toString());
 
     }
 

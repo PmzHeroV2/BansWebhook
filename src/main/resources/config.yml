@@ -1,6 +1,6 @@
 reload-message: "&aReloaded Configuration!"
 litebans-do-not-send-silent-punishments: true
-
+debug-messages: true
 #Permissions :
 #Reload : bwh.reload
 

@@ -6,7 +6,7 @@
 
     <groupId>ir.pmzhero</groupId>
     <artifactId>BansWebhook</artifactId>
-    <version>1.2</version>
+    <version>1.3</version>
     <packaging>jar</packaging>
 
     <name>BansWebhook</name>
@@ -121,6 +121,7 @@
             <groupId>com.github.DevLeoko.AdvancedBan</groupId>
             <artifactId>AdvancedBan-Bundle</artifactId>
             <version>v2.3.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>club.minnced</groupId>

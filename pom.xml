@@ -66,6 +66,11 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <name>jcenter</name>
+            <id>bintray-jcenter</id>
+            <url>https://jcenter.bintray.com</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -92,7 +97,12 @@
             <artifactId>advancedban</artifactId>
             <version>2.1.7</version>
             <scope>system</scope>
-            <systemPath>PATH-TO-ADVANCEDBAN-JARFILE</systemPath>
+            <systemPath>C:/Users/ASUS/IdeaProjects/BansWebhook/AdvancedBan-2.1.7.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>club.minnced</groupId>
+            <artifactId>discord-webhooks</artifactId>
+            <version>0.5.8</version>
         </dependency>
     </dependencies>
 </project>

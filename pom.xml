@@ -6,7 +6,7 @@
 
     <groupId>ir.pmzhero</groupId>
     <artifactId>BansWebhook</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
     <name>BansWebhook</name>
@@ -18,6 +18,7 @@
     </properties>
 
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -39,7 +40,31 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <relocations>
+                                <relocation>
+                                    <pattern>*:*</pattern>
+                                    <shadedPattern>ir.pmzhero.banswebhook.shaded.*</shadedPattern>
+                                </relocation>
+                            </relocations>
+                            <outputFile>Z:\home\sandboxserver\spigot\plugins\${project.artifactId}-${project.version}-shaded.jar</outputFile>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <artifactSet>
+                                <excludes>
+                                    <!-- exclude libraries to avoid issues with already present dependencies -->
+                                    <exclude>com.github.DevLeoko.AdvancedBan:AdvancedBan-Bundle</exclude>
+                                    <exclude>com.gitlab.ruany:LiteBansAPI</exclude>
+                                    <exclude>net.md_5:bungeecord-api</exclude>
+                                    <exclude>org.spigotmc:spigot-api</exclude>
+                                </excludes>
+                                <!--
+                                <includes>
+                                    <include>club.minnced:discord-webhooks</include>
+                                    <include>org.json:json</include>
+                                    <include>org.slf4j:slf4j-api</include>
+                                    <include>org.squareup.okhttp3:okhttp</include>
+                                </includes>
+                                -->
+                            </artifactSet>
                         </configuration>
                     </execution>
                 </executions>
@@ -93,16 +118,33 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>me.leoko.advancedban.AdvancedBan</groupId>
-            <artifactId>advancedban</artifactId>
-            <version>2.1.7</version>
-            <scope>system</scope>
-            <systemPath>C:/Users/ASUS/IdeaProjects/BansWebhook/AdvancedBan-2.1.7.jar</systemPath>
+            <groupId>com.github.DevLeoko.AdvancedBan</groupId>
+            <artifactId>AdvancedBan-Bundle</artifactId>
+            <version>v2.3.0</version>
         </dependency>
         <dependency>
             <groupId>club.minnced</groupId>
             <artifactId>discord-webhooks</artifactId>
             <version>0.5.8</version>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.0-alpha4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>5.0.0-alpha.2</version>
+        </dependency>
+
+
     </dependencies>
 </project>

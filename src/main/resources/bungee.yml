@@ -1,8 +1,0 @@
-name: BansWebhook
-author: PmzHero
-version: ${project.version}
-main: ir.pmzhero.banswebhook.bungeecord.BansWebhook
-description: Sends punishment info to a discord webhook
-softDepends:
-  - LiteBans
-  - AdvancedBan

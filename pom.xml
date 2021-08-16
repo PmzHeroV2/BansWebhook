@@ -40,15 +40,6 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <relocations>
-                                <relocation>
-                                    <pattern>*:*</pattern>
-                                    <shadedPattern>ir.pmzhero.banswebhook.shaded.*</shadedPattern>
-                                </relocation>
-                            </relocations>
-                            <outputFile>
-                                Z:\home\sandboxserver\spigot\plugins\${project.artifactId}-${project.version}-shaded.jar
-                            </outputFile>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <artifactSet>
                                 <excludes>

@@ -58,9 +58,6 @@
                                 </includes>
                                 -->
                             </artifactSet>
-                            <outputFile>
-                                Z:\home\sandboxserver\bungee\plugins\${project.artifactId}-${project.version}-shaded.jar
-                            </outputFile>
                             <relocations>
                                 <relocation>
                                     <pattern>club</pattern>

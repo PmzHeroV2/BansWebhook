@@ -58,6 +58,31 @@
                                 </includes>
                                 -->
                             </artifactSet>
+                            <outputFile>
+                                Z:\home\sandboxserver\bungee\plugins\${project.artifactId}-${project.version}-shaded.jar
+                            </outputFile>
+                            <relocations>
+                                <relocation>
+                                    <pattern>club</pattern>
+                                    <shadedPattern>ir.pmzhero.banswebhook.shaded.club</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>okhttp3</pattern>
+                                    <shadedPattern>ir.pmzhero.banswebhook.shaded.okhttp3</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>kotlin</pattern>
+                                    <shadedPattern>ir.pmzhero.banswebhook.shaded.kotlin</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>okio</pattern>
+                                    <shadedPattern>ir.pmzhero.banswebhook.shaded.okio</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>io</pattern>
+                                    <shadedPattern>ir.pmzhero.banswebhook.shaded.io</shadedPattern>
+                                </relocation>
+                            </relocations>
                         </configuration>
                     </execution>
                 </executions>

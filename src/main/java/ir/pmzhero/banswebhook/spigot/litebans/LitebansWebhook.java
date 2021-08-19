@@ -4,6 +4,8 @@ package ir.pmzhero.banswebhook.spigot.litebans;
 import club.minnced.discord.webhook.WebhookClient;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
+import ir.pmzhero.banswebhook.spigot.BansWebhook;
+import ir.pmzhero.banswebhook.universal.VersionMentor;
 import litebans.api.Database;
 import litebans.api.Entry;
 import litebans.api.Events;
@@ -15,7 +17,7 @@ import java.util.Objects;
 
 public class LitebansWebhook {
 
-    private static final ir.pmzhero.banswebhook.spigot.BansWebhook instance = ir.pmzhero.banswebhook.spigot.BansWebhook.getInstance();
+    private static final ir.pmzhero.banswebhook.spigot.BansWebhook instance = (BansWebhook) VersionMentor.getVersionInstance();
 
 
     public static void registerEvent(String entryType, String punishedBy) {
